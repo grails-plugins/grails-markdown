@@ -1,14 +1,13 @@
-package com.naleid.grails
+package org.apache.grails.markdown
 
-import grails.test.mixin.TestMixin
-import grails.test.mixin.support.GrailsUnitTestMixin
+
+import org.grails.testing.GrailsUnitTest
 import spock.lang.Specification
 
 /**
  * Tests the String.metaClass.markdownToHtml() method.
  */
-@TestMixin(GrailsUnitTestMixin)
-class MarkdownStringToMarkdownTests extends Specification {
+class MarkdownToMarkdownSpec extends Specification implements GrailsUnitTest {
 
 	void setup() {
 		defineBeans {
@@ -22,7 +21,7 @@ class MarkdownStringToMarkdownTests extends Specification {
 
 	void 'string markdown to HTML'() {
 		expect:
-		'<p><a href="http://example.net/">This link</a> has no title attribute.</p>' ==
+		'<p><a href="http://example.net/">This link</a> has no title attribute.</p>\n' ==
 				  '[This link](http://example.net/) has no title attribute.'.markdownToHtml()
 	}
 }

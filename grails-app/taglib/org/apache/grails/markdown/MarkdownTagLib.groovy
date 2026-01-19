@@ -1,10 +1,12 @@
-package com.naleid.grails
+package org.apache.grails.markdown
 
-class MarkdownTagLib {
+import grails.artefact.TagLibrary
+
+class MarkdownTagLib implements TagLibrary {
 
 	static namespace = "markdown"
 
-	def markdownService
+	MarkdownService markdownService
 
 	def renderHtml = { attrs, body ->
 		String text
