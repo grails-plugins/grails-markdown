@@ -1,13 +1,12 @@
 package org.apache.grails.markdown
 
-
 import org.grails.testing.GrailsUnitTest
 import spock.lang.Specification
 
 /**
- * Tests the String.metaClass.markdownToHtml() method.
+ * Tests the extension method.
  */
-class MarkdownToMarkdownSpec extends Specification implements GrailsUnitTest {
+class MarkdownExtensionSpec extends Specification implements GrailsUnitTest {
 
 	void setup() {
 		defineBeans {
@@ -15,13 +14,21 @@ class MarkdownToMarkdownSpec extends Specification implements GrailsUnitTest {
 				grailsApplication = ref('grailsApplication')
 			}
 		}
+	}
 
-		MarkdownPluginSupport.doWithDynamicMethods applicationContext.markdownService
+	void cleanup() {
+		MarkdownExtension.resetCache()
 	}
 
 	void 'string markdown to HTML'() {
 		expect:
 		'<p><a href="http://example.net/">This link</a> has no title attribute.</p>\n' ==
 				  '[This link](http://example.net/) has no title attribute.'.markdownToHtml()
+	}
+
+	void 'string HTML to markdown'() {
+		expect:
+		'[This link][] has no title attribute.\n\n[This link]: http://example.net/\n\n' ==
+				'<p><a href="http://example.net/">This link</a> has no title attribute.</p>'.htmlToMarkdown()
 	}
 }

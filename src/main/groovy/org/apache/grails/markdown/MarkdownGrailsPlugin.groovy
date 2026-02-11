@@ -17,7 +17,4 @@ class MarkdownGrailsPlugin extends Plugin {
 	def scm = [url: "https://github.com/grails-plugins/grails-markdown"]
 	def license = 'APACHE'
 
-	void doWithDynamicMethods() {
-		MarkdownPluginSupport.doWithDynamicMethods applicationContext.markdownService
-	}
 }
