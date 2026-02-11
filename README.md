@@ -1,13 +1,3 @@
-> Please take note!!!
-> --
-> I could not find an official repository for this plugin (nor forks of an official repo). The project appears to have been abandoned.
-> 
-> I managed to find an archived copy of the original repository, but I have not checked/verified anything about this repo.
-> I am making it available here for those who want or need the source. Please use at your own risk.
-> 
-> At this time, I am not making any updates, fixes, or publications of this work aside from making the source code available.
-
-
 # Grails Markdown
 
 A Grails plugin to provide tag library and service support for markdown.  It can be used both for converting markdown into HTML, as well as converting HTML back into markdown.
