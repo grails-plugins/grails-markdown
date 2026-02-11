@@ -48,11 +48,11 @@ The plugin also adds `markdownToHtml()` and `htmlToMarkdown()` methods to the St
 
 ## Service
 
-There's also a `markdownService` that provides more fine-grained control.  It provides property accessors to the `processor` (an instance of `PegDownProcessor`) and `remark` (and instance of `Remark`) classes.  It also has several methods:
+There's also a `markdownService` that provides more fine-grained control. It has several methods:
 
 ### Convert Markdown to HTML - `markdown(text, [config])`
 
-This method converts markdown into HTML using the Pegdown library.  You can optionally provide an alternate configuration to use instead of the default.  (See below for configuration options.)
+This method converts markdown into HTML using the [Flexmark][] library.  You can optionally provide an alternate configuration to use instead of the default.  (See below for configuration options.)
 
 ### Convert HTML to Markdown - `htmlToMarkdown(text, [baseUri], [config])`
 
@@ -65,7 +65,7 @@ This method allows you to clean up markdown provided from untrusted sources.  It
 
 ## Dependecies
 
-This plugin makes use of the [Pegdown][] and [Remark][] libraries.
+This plugin makes use of the [Flexmark][] and [Pegdown][] (for compatibility with previous versions) libraries.
 
 
 ## Thanks
@@ -80,13 +80,6 @@ The `grails-markdown` application has a variety of options that you can configur
 
 Changing the configuration simultaneously configures both the conversion *to* HTML, as well as converting HTML
 *back* into Markdown.
-
-The default configuration is almost 100% pure Markdown, with one caveat:
-
-> NOTE: The Markdown engine used in `grails-markdown` does not allow in-word emphasis.
->
-> This means that when you write `an_emphasized_word`, you don't get <code>an<em>emphasized</em>word</code>.
-> You just get `an_emphasized_word`.  This is true no matter the character used (`_` or `*`), or for italics or bold.
 
 ### Hardwraps
 
@@ -236,23 +229,20 @@ when converting relative links.
 Setting it to `false` will simply remove relative links, while setting it to `true` or not setting it at all
 will use `grailsApplication.config.grails.serverURL`.
 
-### Customize Pegdown
-
-    markdown.customizePegdown = { int extensions -> ... }
-
-Allows for customization of the Pegdown extensions before creating a `PegdownProcessor` using a closure.
-This closure will be called at the time the `PegdownProcessor` is first needed, not necessarily at startup.
-
-### Customize Remark
-
-    markdown.customizeRemark = { com.overzealous.remark.Options options -> ... }
-
-Allows for customization of the Remark `Options` before creating a `Remark` using a closure.
-This closure will be called at the time the `Remark` is first needed, not necessarily at startup.
-
+### Customize Flexmark
+```groovy
+markdown.customizeFlexmark = { com.vladsch.flexmark.util.data.MutableDataHolder options -> 
+    // Customize flexmark options here
+    options.set(SomeExtension.SOME_OPTION, value)
+    return options // Must return the options
+}
+```
+Allows for customization of the Flexmark options used to create flexmark objects using a closure.
+This closure will be called at the time the [Flexmark][] is first needed, not necessarily at startup.
 
 
 [Daring Fireball]: http://daringfireball.net/projects/markdown/basics
+[Flexmark]: https://github.com/vsch/flexmark-java
 [Pegdown]: http://pegdown.org
 [Remark]: http://www.overzealous.com/remark
 [Markdown Extra]: http://michelf.com/projects/php-markdown/extra/
