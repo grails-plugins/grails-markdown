@@ -24,4 +24,9 @@ buildCache {
     }
 }
 
-rootProject.name = 'grails-markdown'
+rootProject.name = 'grails-markdown-plugin'
+
+include 'plugin'
+include 'example'
+
+findProject(":plugin").name = "grails-markdown"

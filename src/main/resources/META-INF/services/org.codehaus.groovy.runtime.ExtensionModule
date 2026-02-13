@@ -1,3 +1,0 @@
-moduleName=GrailsMarkdownExtensionModule
-moduleVersion=1.0
-extensionClasses=org.apache.grails.markdown.MarkdownExtension

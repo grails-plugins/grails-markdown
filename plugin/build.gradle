@@ -1,0 +1,29 @@
+plugins {
+    id "java-library"
+    id "idea"
+    id "eclipse"
+    id "maven-publish"
+}
+
+apply plugin: 'org.apache.grails.gradle.grails-plugin'
+
+compileJava.options.release = 17
+
+dependencies {
+    implementation platform("org.apache.grails:grails-bom:$grailsVersion")
+    compileOnly 'org.apache.grails:grails-core'
+    compileOnly 'org.apache.grails.views:grails-web-taglib'
+
+    implementation 'com.vladsch.flexmark:flexmark-all:0.64.8'
+
+    console 'org.apache.grails:grails-console'
+
+    testImplementation 'org.apache.grails:grails-testing-support-web'
+    testImplementation "org.spockframework:spock-core"
+}
+
+bootJar.enabled = false
+
+grails {
+    springDependencyManagement = false
+}
