@@ -55,5 +55,5 @@ jobs:
           MAVEN_PUBLISH_USERNAME: ${{ secrets.MAVEN_PUBLISH_USERNAME }}
           MAVEN_PUBLISH_PASSWORD: ${{ secrets.MAVEN_PUBLISH_PASSWORD }}
           MAVEN_PUBLISH_URL: ${{ secrets.MAVEN_PUBLISH_SNAPSHOT_URL }}
-        working-directory: .
-        run: ./gradlew publish
+        working-directory: ./plugin
+        run: ../gradlew publish
