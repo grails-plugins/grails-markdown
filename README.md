@@ -1,37 +1,48 @@
-# Grails Markdown
+# 🧩 Grails Markdown
 
-A Grails plugin to provide tag library and service support for markdown.  It can be used both for converting markdown into HTML, as well as converting HTML back into markdown.
+[![Maven Central](https://img.shields.io/maven-metadata/v.svg?metadataUrl=https://repo1.maven.org/maven2/org/grails/plugins/grails-markdown/maven-metadata.xml&label=maven-central)](https://central.sonatype.com/artifact/org.grails.plugins/grails-markdown)
+[![CI](https://github.com/grails-plugins/grails-markdown/actions/workflows/gradle.yml/badge.svg?event=push)](https://github.com/grails-plugins/grails-markdown/actions/workflows/gradle.yml)
+
+
+A Grails plugin to provide tag library and service support for Markdown. It can be used both for converting Markdown
+into HTML, and converting HTML back into Markdown.
 
 See [Daring Fireball][] for syntax basics.
 
+## Installation
+```groovy
+dependencies {
+    implemenation: "org.grails.plugins:grails-markdown:4.0.0"
+}
+```
 ## Tag Usage
 
-The tag library provides simple usage to convert markdown to HTML on-the-fly.
+The tag library provides simple usage to convert Markdown to HTML on-the-fly.
 
 ### Tag Body
 
-You can either use the body of the tag to hold the markdown:
-
-    <markdown:renderHtml>This is a *test* of markdown.</markdown:renderHtml>
-
+You can either use the body of the tag to hold the Markdown:
+```html
+<markdown:renderHtml>This is a *test* of Markdown.</markdown:renderHtml>
+```
 renders:
-
-    <p>This is a <em>test</em> of markdown.</p>
-
+```html
+<p>This is a <em>test</em> of Markdown.</p>
+```
 ### "text" Attribute
-
-    <markdown:renderHtml text="Yet **another** markdown test."/>
-
+```html
+<markdown:renderHtml text="Yet **another** Markdown test."/>
+```
 renders:
-
-    <p>Yet <strong>another</strong> markdown test.</p>
-
+```html
+<p>Yet <strong>another</strong> Markdown test.</p>
+```
 ### "template" Attribute
 
-You can also use a template that contains the markdown (which is useful for storing documentation):
-
-    <markdown:renderHtml template="readme" />
-
+You can also use a template that contains the Markdown (which is useful for storing documentation):
+```html
+<markdown:renderHtml template="readme" />
+```
 ## String Extensions
 
 The plugin also adds `markdownToHtml()` and `htmlToMarkdown()` methods to the String class.
@@ -42,7 +53,7 @@ There's also a `markdownService` that provides more fine-grained control. It has
 
 ### Convert Markdown to HTML - `markdown(text, [config])`
 
-This method converts markdown into HTML using the [Flexmark][] library.  You can optionally provide an alternate configuration to use instead of the default.  (See below for configuration options.)
+This method converts Markdown into HTML using the [Flexmark][] library.  You can optionally provide an alternate configuration to use instead of the default.  (See below for configuration options.)
 
 ### Convert HTML to Markdown - `htmlToMarkdown(text, [baseUri], [config])`
 
@@ -50,17 +61,15 @@ This method converts HTML (say, from a rich text input) back into Markdown.  You
 
 ### Sanitize Markdown - `sanitize(text, [config])`
 
-This method allows you to clean up markdown provided from untrusted sources.  It's mostly useful if you are allowing the user to include raw HTML with their markdown.
-
+This method allows you to clean up Markdown provided from untrusted sources.  It's mostly useful if you are allowing the user to include raw HTML with their Markdown.
 
 ## Dependecies
 
 This plugin makes use of the [Flexmark][] and [Pegdown][] (for compatibility with previous versions) libraries.
 
-
 ## Thanks
 
-Thanks to @dani_latorre for the patch adding markdownToHtml functionality on the String class.
+Thanks to @dani_latorre for the patch adding `markdownToHtml` functionality on the String class.
 
 
 # Configuration
@@ -68,18 +77,17 @@ Thanks to @dani_latorre for the patch adding markdownToHtml functionality on the
 The `grails-markdown` application has a variety of options that you can configure either as a general option, in
 `Config.groovy`, or per-usage by providing a `Map` of options when using the service directly.
 
-Changing the configuration simultaneously configures both the conversion *to* HTML, as well as converting HTML
-*back* into Markdown.
+Changing the configuration simultaneously configures both the conversion *to* HTML, and converting HTML *back* into Markdown.
 
-### Hardwraps
+### Hard wraps
 
     markdown.hardwraps = true        // Configuration
     [hardwraps: true]                // Custom Map
 
-Markdown makes simple hardwraps a little difficult, requiring the user to write two spaces at the end of a line to
+Markdown makes simple hard wraps a little difficult, requiring the user to write two spaces at the end of a line to
 get a linebreak.  This is convenient when writing in a terminal, but inconvenient if your editor handles soft-wraps internally.
 
-Enabling hardwraps means that all linebreaks are kept.
+Enabling hard wraps means that all linebreaks are kept.
 
 ### Auto Links
 
@@ -93,9 +101,9 @@ Example Markdown:
     http://www.google.com/
 
 Example HTML:
-
-    <a href="http://www.google.com/">http://www.google.com/</a>
-
+```html
+<a href="https://www.google.com/">https://www.google.com/</a>
+```
 ### Abbreviations
 
     markdown.abbreviations = true    // Configuration
@@ -111,9 +119,9 @@ Example Markdown:
     *[HTML]: Hyper-Text Markup Language
 
 Example HTML:
-
-    This is <abbr title="Hyper-Text Markup Language">HTML</abbr>
-
+```html
+This is <abbr title="Hyper-Text Markup Language">HTML</abbr>
+```
 ### Definition Lists
 
     markdown.definitionLists = true  // Configuration
@@ -127,12 +135,12 @@ Example Markdown:
     :   A rapid web-application development platform for the JVM.
 
 Example HTML:
-
-    <dl>
-	    <dt>Grails</dt>
-	    <dd>A rapid web-application development platform for the JVM.</dd>
-    </dl>
-
+```html
+<dl>
+    <dt>Grails</dt>
+    <dd>A rapid web-application development platform for the JVM.</dd>
+</dl>
+```
 ### Smart Quotes, Smart Punctation
 
     markdown.smartQuotes = true      // Configuration
@@ -210,9 +218,9 @@ With this option enabled, all raw HTML will be removed when converting Markdown 
 Removes tables when converting HTML to Markdown, instead of leaving them as-is.
 
 ### Base URI
-
-    markdown.baseUri = 'http://example.com'
-
+```properties
+markdown.baseUri = 'https://example.com'
+```
 You can override the default base URI (which is determined by your configuration).  The base URI is used
 when converting relative links.
 
